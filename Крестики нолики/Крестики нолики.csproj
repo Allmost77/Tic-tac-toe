@@ -9,4 +9,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="data\fonts\RubikMonoOne-Regular.ttf" />
+    <None Remove="data\Picture\Background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\fonts\RubikMonoOne-Regular.ttf" />
+    <Resource Include="data\Picture\Background.png" />
+  </ItemGroup>
+
 </Project>
