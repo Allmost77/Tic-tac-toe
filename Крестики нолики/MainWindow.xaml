@@ -6,6 +6,33 @@
         xmlns:local="clr-namespace:Крестики_нолики"
         mc:Ignorable="d"
         Title="Крестики нолики" Height="500" Width="800" MinHeight="500" MinWidth="800">
+    <Window.Resources>
+        <!-- Ресурсы цветов -->
+        <SolidColorBrush x:Key="DarkGrayBrush" Color="#2E2E2E"/>
+        <SolidColorBrush x:Key="LightGrayBrush" Color="Black"/>
+        <SolidColorBrush x:Key="DarkBlueBrush" Color="#FF1F2E2E"/>
+
+        <!-- Стиль кнопок -->
+        <Style x:Key="FlatButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource DarkGrayBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Bodoni MT"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+
     <Grid ShowGridLines="False">
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/data/Picture/Background.png" Stretch="Fill"/>
@@ -24,19 +51,29 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Play_button" Width="92" Height="37" Grid.Column="1" Grid.Row="1" Content="Играть" FontFamily="Bodoni MT" FontSize="14" HorizontalAlignment="Center" Margin="0,46,0,55" Style="{DynamicResource FlatButtonStyle}"/>
-            <Button x:Name="Settings_button" Width="92" Height="37" Grid.Column="1" Grid.Row="2" Content="Настройки" FontFamily="Bodoni MT" FontSize="14" HorizontalAlignment="Center" Margin="0,31,0,40" Style="{DynamicResource FlatButtonStyle}" Click="Settings_button_Click"/>
-            <Button x:Name="Exit_button" Width="92" Height="37" Grid.Column="1" Grid.Row="3" Content="Выход" FontFamily="Bodoni MT" FontSize="14" HorizontalAlignment="Center" Style="{DynamicResource FlatButtonStyle}" Click="Exit_button_Click"/>
-            <Label Grid.Column="1" Content="Крестики-нолики"  Grid.Row="0" FontSize="30" FontFamily="Main_menu_font" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button x:Name="Play_button" Width="92" Height="37" Grid.Column="1" Grid.Row="1" 
+                    Content="Играть" HorizontalAlignment="Center" Margin="0,46,0,55" 
+                    Style="{StaticResource FlatButtonStyle}" Click="Play_button_Click"/>
+
+            <Button x:Name="Settings_button" Width="92" Height="37" Grid.Column="1" Grid.Row="2" 
+                    Content="Настройки" HorizontalAlignment="Center" Margin="0,31,0,40" 
+                    Style="{StaticResource FlatButtonStyle}" Click="Settings_button_Click"/>
+
+            <Button x:Name="Exit_button" Width="92" Height="37" Grid.Column="1" Grid.Row="3" 
+                    Content="Выход" HorizontalAlignment="Center" 
+                    Style="{StaticResource FlatButtonStyle}" Click="Exit_button_Click"/>
+
+            <Label Foreground="Black" Grid.Column="1" Content="Крестики-нолики" Grid.Row="0" 
+                   FontSize="28" FontFamily="Bodoni MT" Height="50" Background="Transparent" 
+                   BorderBrush="Transparent" FontWeight="Bold" HorizontalAlignment="Center"/>
         </Grid>
 
         <!-- Панель настроек -->
         <Grid x:Name="SettingsPanel" Visibility="Collapsed">
-            <Grid.Background>
-                <SolidColorBrush Color="#80000000"/>
-            </Grid.Background>
+           
 
-            <Border Background="#2e2e2e" 
+            <Border Background="{StaticResource DarkGrayBrush}" 
                     CornerRadius="15" 
                     Width="400" 
                     Height="300"
@@ -58,11 +95,11 @@
                         <TextBlock Text="Настройки" 
                                  FontSize="24" 
                                  Foreground="White" 
-                                 FontFamily="{DynamicResource Main_menu_font}"/>
+                                 FontFamily="Bodoni MT"/>
 
                         <Button Grid.Column="1" 
                                 Content="✕" 
-                                Style="{DynamicResource FlatButtonStyle}"
+                                Style="{StaticResource FlatButtonStyle}"
                                 Width="30" 
                                 Height="30"
                                 Padding="0"
@@ -77,10 +114,90 @@
                                  Margin="0,10"
                                  IsChecked="{Binding IsFullscreen}"
                                  Click="FullscreenCheckbox_Click"/>
-
-                        <!-- Здесь можно добавить другие настройки -->
                     </StackPanel>
                 </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="SizeSelectionPanel" Visibility="Collapsed">
+          
+
+            <Border Background="{StaticResource DarkGrayBrush}" 
+                    CornerRadius="20" 
+                    Width="500" 
+                    Height="300"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Выберите размер поля" 
+                             FontSize="24" 
+                             Foreground="White" 
+                             FontFamily="Bodoni MT"
+                             HorizontalAlignment="Center"
+                             Margin="0,20,0,0"/>
+
+                    <StackPanel Grid.Row="1" 
+                              VerticalAlignment="Center" 
+                              HorizontalAlignment="Center" 
+                              Margin="20">
+                        <ComboBox x:Name="FieldSizeComboBox" 
+                                 Width="200" 
+                                 Height="30" 
+                                 Margin="0,10"
+                                 Background="{StaticResource LightGrayBrush}">
+                            <ComboBoxItem>3x3</ComboBoxItem>
+                            <ComboBoxItem>4x4</ComboBoxItem>
+                            <ComboBoxItem>5x5</ComboBoxItem>
+                        </ComboBox>
+
+                        <ComboBox x:Name="fieldChooseLevelBot" 
+                                 Width="200" 
+                                 Height="30" 
+                                 Margin="0,10,0,0" 
+                                 Background="{StaticResource LightGrayBrush}" 
+                                 SelectedIndex="0">
+                            <ComboBoxItem>Легкий</ComboBoxItem>
+                            <ComboBoxItem>Средний</ComboBoxItem>
+                            <ComboBoxItem>Сложный</ComboBoxItem>
+                            <ComboBoxItem>Друг vs друг</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" 
+                              Orientation="Horizontal" 
+                              HorizontalAlignment="Center" 
+                              Margin="0,0,0,20">
+                        <Button Content="Начать игру" 
+                                Width="120" 
+                                Height="35" 
+                                Margin="10"
+                                Style="{StaticResource FlatButtonStyle}"
+                                Click="StartGame_Click"/>
+                        <Button Content="Отмена" 
+                                Width="120" 
+                                Height="35" 
+                                Margin="10"
+                                Style="{StaticResource FlatButtonStyle}"
+                                Click="CancelSizeSelection_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="Play_Arena" Visibility="Collapsed">
+           
+            <Border Background="{StaticResource DarkBlueBrush}" 
+                    CornerRadius="20" 
+                    Width="500" 
+                    Height="300"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
             </Border>
         </Grid>
     </Grid>

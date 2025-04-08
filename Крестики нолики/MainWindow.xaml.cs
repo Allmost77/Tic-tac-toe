@@ -16,7 +16,7 @@ namespace Крестики_нолики
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool IsFullscreen { get; set; }
+        public bool IsFullscreen { get; set; } = false;
 
         public MainWindow()
         {
@@ -40,19 +40,42 @@ namespace Крестики_нолики
         {
             if (IsFullscreen)
             {
-                WindowState = WindowState.Maximized;
-                WindowStyle = WindowStyle.None;
+                this.WindowState = WindowState.Normal;
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                IsFullscreen = false;
             }
             else
             {
-                WindowState = WindowState.Normal;
-                WindowStyle = WindowStyle.SingleBorderWindow;
+                this.WindowState = WindowState.Maximized;
+                this.WindowStyle = WindowStyle.None;
+                IsFullscreen = true;
             }
         }
 
         private void Exit_button_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Play_button_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenuGrid.Visibility = Visibility.Collapsed;
+            SizeSelectionPanel.Visibility = Visibility.Visible;
+       
+        }
+
+      
+        private void StartGame_Click(object sender, RoutedEventArgs e)
+        {
+            SizeSelectionPanel.Visibility = Visibility.Hidden;
+            MainMenuGrid.Visibility = Visibility.Hidden;
+
+        }
+
+        private void CancelSizeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            SizeSelectionPanel.Visibility = Visibility.Collapsed;
+            MainMenuGrid.Visibility = Visibility.Visible;
         }
     }
 }

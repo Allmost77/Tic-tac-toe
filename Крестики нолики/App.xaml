@@ -4,69 +4,44 @@
              xmlns:local="clr-namespace:Крестики_нолики"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <FontFamily x:Key="Main_menu_font">pack://application:,,,/data/fonts/#Rubik Mono One</FontFamily>
-        
-        <!-- Основные цвета -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#2e2e2e"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#FF4081"/>
-        <SolidColorBrush x:Key="BackgroundColor" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="TextColor" Color="#212121"/>
-        
-        <!-- Стиль для кнопок -->
-        <Style x:Key="FlatButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Твои стили и ресурсы -->
+            <FontFamily x:Key="Main_menu_font">pack://application:,,,/data/fonts/#Rubik Mono One</FontFamily>
+
+            <SolidColorBrush x:Key="PrimaryColor" Color="Black"/>
+            <SolidColorBrush x:Key="SecondaryColor" Color="#FF4081"/>
+            <SolidColorBrush x:Key="BackgroundColor"  Color="Transparent"/>
+            <SolidColorBrush x:Key="TextColor" Color="#212121"/>
+
+            <Style x:Key="FlatButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="15,8"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" 
+                                <ContentPresenter HorizontalAlignment="Center" 
                                             VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#1976D2"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Стиль для текстовых полей -->
-        <Style x:Key="FlatTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#F5F5F5"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#EEEEEE"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Стиль для меток -->
-        <Style x:Key="FlatLabelStyle" TargetType="Label">
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0,4"/>
-        </Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#1976D2"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
